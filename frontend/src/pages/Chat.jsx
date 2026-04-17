@@ -1,17 +1,21 @@
 import { useState } from "react";
 import axios from "axios";
 
-export default function Chat() {
+export default function Chat() 
+{
   const [message, setMessage] = useState("");
   const [chat, setChat] = useState([]);
   const token = localStorage.getItem("token");
 
   const send = async () => {
-    const res = await axios.post(
-      "http://localhost:5000/api/chat",
-      { message },
-      { headers: { Authorization: token } }
-    );
+  const res = await axios.post(
+    `${import.meta.env.VITE_API_URL}/api/chat`,
+    { message },
+    {
+      headers: { Authorization: token },
+    }
+  );
+  };
 
     setChat([...chat, { u: message, a: res.data.reply }]);
     setMessage("");
@@ -42,4 +46,3 @@ export default function Chat() {
       </button>
     </div>
   );
-}

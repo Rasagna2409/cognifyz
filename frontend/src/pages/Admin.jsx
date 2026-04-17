@@ -12,9 +12,9 @@ export default function Admin() {
   const fetchUsers = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:5000/api/admin/users",
+        `${import.meta.env.VITE_API_URL}/api/admin/users`,
         {
-          headers: { Authorization: token },
+            headers: { Authorization: token },
         }
       );
       setUsers(res.data);

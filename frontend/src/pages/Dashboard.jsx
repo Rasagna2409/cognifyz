@@ -6,11 +6,11 @@ export default function Dashboard() {
   const token = localStorage.getItem("token");
 
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/api/tasks", {
-        headers: { Authorization: token },
-      })
-      .then((res) => setTasks(res.data));
+  axios
+    .get(`${import.meta.env.VITE_API_URL}/api/tasks`, {
+      headers: { Authorization: token },
+    })
+    .then((res) => setTasks(res.data));
   }, []);
 
   return (
