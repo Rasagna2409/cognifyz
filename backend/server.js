@@ -16,15 +16,11 @@ dotenv.config();
 
 const app = express();
 app.use(express.json());
+
 app.use(cors({
-  origin: [
-    "http://localhost:5173",
-    "https://cognifyz-three.vercel.app",
-    "https://cognifyz-eta.vercel.app",
-    "https://cognifyz-4eh3x9gfa-rasagna2409s-projects.vercel.app"
-  ],
+  origin: "*",
   methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true
+  credentials: false
 }));
 
 mongoose.connect(process.env.MONGO_URI, { family: 4 })
