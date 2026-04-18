@@ -22,4 +22,8 @@ app.use("/api/tasks", taskRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/chat", chatRoutes);
 
+app.get("/", (req, res) => {
+  res.send("🚀 Cognifyz Backend Running Successfully");
+});
+
 app.listen(5000, () => console.log("Server running"));
