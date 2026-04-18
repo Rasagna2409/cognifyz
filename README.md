@@ -2,13 +2,19 @@
 
 A full-stack SaaS web application built with **React, Node.js, Express, and MongoDB**, featuring authentication, task management, AI chat, and an admin dashboard.
 
-🌐 Live Demo
+🚀 Cognifyz - Live Deployment
+🌐 Frontend (Vercel)
 
-🔗 Frontend: https://cognifyz-three.vercel.app
+Production: https://cognifyz-three.vercel.app
+Preview: https://cognifyz-4eh3x9gfa-rasagna2409s-projects.vercel.app
 
-  https://cognifyz-4eh3x9gfa-rasagna2409s-projects.vercel.app
+⚙️ Backend API (Render)
 
-🔗 Backend API: https://cognifyz-2.onrender.com
+API URL: https://cognifyz-2.onrender.com
+
+🗄️ Database (MongoDB Atlas)
+- MongoDB Atlas (Cloud)
+- Cluster Region: Mumbai (ap-south-1)
 
 ## ✨ Features
 
