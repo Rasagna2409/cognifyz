@@ -5,11 +5,11 @@ A full-stack SaaS web application built with **React, Node.js, Express, and Mong
 🚀 Cognifyz - Live Deployment
 🌐 Frontend (Vercel)
 
-Preview: https://cognifyz-4eh3x9gfa-rasagna2409s-projects.vercel.app
+https://cognifyz-eta.vercel.app
 
 ⚙️ Backend API (Render)
 
-API URL: https://cognifyz-2.onrender.com
+https://cognifyz-2.onrender.com
 
 🗄️ Database (MongoDB Atlas)
 - MongoDB Atlas (Cloud)
@@ -44,10 +44,15 @@ API URL: https://cognifyz-2.onrender.com
 * JWT Authentication
 * REST API Architecture
 
+> ⚠️ If you get MongoDB SRV errors locally, add this to the top of server.js:
+> import dns from "dns";
+> dns.setServers(["8.8.8.8", "1.1.1.1"]);
+
+
 ### Deployment
 
 * Frontend: Vercel
-* Backend: Render / Vercel
+* Backend: Render
 * Database: MongoDB Atlas
 
 ## 📦 Getting Started
