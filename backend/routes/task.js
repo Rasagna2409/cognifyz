@@ -12,18 +12,23 @@ router.get("/", auth, async (req, res) => {
 
 // Create task
 router.post("/", auth, async (req, res) => {
-  const { title, description, priority, status, dueDate, category } = req.body;
-  const task = await Task.create({
-    userId: req.user.id,
-    title,
-    description,
-    priority,
-    status,
-    dueDate,
-    category,
-    completed: false
-  });
-  res.json(task);
+  try {
+    const { title, description, priority, status, dueDate, category } = req.body;
+    const task = await Task.create({
+      userId: req.user.id,
+      title,
+      description,
+      priority,
+      status,
+      dueDate,
+      category,
+      completed: false
+    });
+    res.json(task);
+  } catch (err) {
+    console.error("Create task error:", err.message);
+    res.status(500).json({ msg: err.message });
+  }
 });
 
 // Update task
