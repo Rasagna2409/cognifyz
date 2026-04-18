@@ -5,7 +5,6 @@ A full-stack SaaS web application built with **React, Node.js, Express, and Mong
 🚀 Cognifyz - Live Deployment
 🌐 Frontend (Vercel)
 
-Production: https://cognifyz-three.vercel.app
 Preview: https://cognifyz-4eh3x9gfa-rasagna2409s-projects.vercel.app
 
 ⚙️ Backend API (Render)
