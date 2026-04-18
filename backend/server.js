@@ -40,4 +40,4 @@ app.get("/", (req, res) => {
   res.send("🚀 Cognifyz Backend Running Successfully");
 });
 
-app.listen(process.env.PORT || 5000, () => console.log("🚀 Server running"));#trigger 
+app.listen(process.env.PORT || 5000, () => console.log("🚀 Server running"));
