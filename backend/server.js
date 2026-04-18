@@ -1,3 +1,6 @@
+import dns from "dns";
+dns.setServers(["8.8.8.8", "1.1.1.1"]);
+dns.setDefaultResultOrder("ipv4first");
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
@@ -14,7 +17,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-mongoose.connect(process.env.MONGO_URI)
+mongoose.connect(process.env.MONGO_URI, { family: 4 })
   .then(() => console.log("MongoDB Connected"));
 
 app.use("/api/auth", authRoutes);
