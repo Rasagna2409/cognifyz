@@ -18,9 +18,11 @@ const app = express();
 app.use(express.json());
 
 app.use(cors({
-  origin: "*",
+  origin: function(origin, callback) {
+    callback(null, true);
+  },
   methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: false
+  credentials: true
 }));
 
 mongoose.connect(process.env.MONGO_URI, { family: 4 })
