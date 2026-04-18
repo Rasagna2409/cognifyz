@@ -1,6 +1,7 @@
 import dns from "dns";
 dns.setServers(["8.8.8.8", "1.1.1.1"]);
 dns.setDefaultResultOrder("ipv4first");
+
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
@@ -15,10 +16,20 @@ dotenv.config();
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: [
+    "http://localhost:5173",
+    "https://cognifyz-three.vercel.app",
+    "https://cognifyz-eta.vercel.app",
+    "https://cognifyz-4eh3x9gfa-rasagna2409s-projects.vercel.app"
+  ],
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
 
 mongoose.connect(process.env.MONGO_URI, { family: 4 })
-  .then(() => console.log("MongoDB Connected"));
+  .then(() => console.log("✅ MongoDB Connected"))
+  .catch((err) => console.error("❌ MongoDB connection failed:", err.message));
 
 app.use("/api/auth", authRoutes);
 app.use("/api/tasks", taskRoutes);
@@ -29,4 +40,4 @@ app.get("/", (req, res) => {
   res.send("🚀 Cognifyz Backend Running Successfully");
 });
 
-app.listen(5000, () => console.log("Server running"));
+app.listen(process.env.PORT || 5000, () => console.log("🚀 Server running"));
