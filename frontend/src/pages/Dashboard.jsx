@@ -28,6 +28,7 @@ export default function Dashboard() {
   const [filterPriority, setFilterPriority] = useState("All");
   const [filterStatus, setFilterStatus] = useState("All");
   const [search, setSearch] = useState("");
+  const [activeFilter, setActiveFilter] = useState("All");
   const [newTask, setNewTask] = useState({
     title: "", description: "", priority: "Medium",
     status: "Todo", dueDate: "", category: "General"
@@ -103,6 +104,12 @@ export default function Dashboard() {
   };
 
   const filteredTasks = tasks
+    .filter(t => {
+      if (activeFilter === "Completed") return t.completed;
+      if (activeFilter === "Pending") return !t.completed;
+      if (activeFilter === "High") return t.priority === "High";
+      return true;
+    })
     .filter(t => filterPriority === "All" || t.priority === filterPriority)
     .filter(t => filterStatus === "All" || t.status === filterStatus)
     .filter(t =>
@@ -134,14 +141,17 @@ export default function Dashboard() {
       {/* Stats */}
       <div style={{ display: "flex", gap: "15px", marginBottom: "30px", flexWrap: "wrap" }}>
         {[
-          { label: "Total Tasks", value: tasks.length, color: "#38bdf8" },
-          { label: "Completed", value: tasks.filter(t => t.completed).length, color: "#22c55e" },
-          { label: "Pending", value: tasks.filter(t => !t.completed).length, color: "#facc15" },
-          { label: "High Priority", value: tasks.filter(t => t.priority === "High").length, color: "#ef4444" },
+          { label: "Total Tasks", value: tasks.length, color: "#38bdf8", filter: "All" },
+          { label: "Completed", value: tasks.filter(t => t.completed).length, color: "#22c55e", filter: "Completed" },
+          { label: "Pending", value: tasks.filter(t => !t.completed).length, color: "#facc15", filter: "Pending" },
+          { label: "High Priority", value: tasks.filter(t => t.priority === "High").length, color: "#ef4444", filter: "High" },
         ].map((stat, i) => (
           <motion.div key={stat.label} className="card"
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: i * 0.1 }} style={{ flex: "1", minWidth: "120px" }}>
+            transition={{ delay: i * 0.1 }}
+            onClick={() => setActiveFilter(stat.filter)}
+            style={{ flex: "1", minWidth: "120px", cursor: "pointer",
+              border: activeFilter === stat.filter ? `2px solid ${stat.color}` : "2px solid transparent" }}>
             <p style={{ margin: 0, color: "rgba(255,255,255,0.6)", fontSize: "13px" }}>{stat.label}</p>
             <h1 style={{ margin: "6px 0 0", color: stat.color, fontSize: "36px" }}>{stat.value}</h1>
           </motion.div>
