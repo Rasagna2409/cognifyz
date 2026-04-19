@@ -66,8 +66,8 @@ export default function Dashboard() {
 
   const updateTask = async () => {
     try {
-      const res = await axios.put(`${import.meta.env.VITE_API_URL}/api/tasks/${editTask._id}`, editTask, { headers });
-      setTasks(prev => prev.map(t => t._id === editTask._id ? res.data : t));
+      await axios.put(`${import.meta.env.VITE_API_URL}/api/tasks/${editTask._id}`, editTask, { headers });
+      await fetchTasks();
       setEditTask(null);
     } catch (err) {
       setError("Failed to update task.");
@@ -105,7 +105,13 @@ export default function Dashboard() {
   const filteredTasks = tasks
     .filter(t => filterPriority === "All" || t.priority === filterPriority)
     .filter(t => filterStatus === "All" || t.status === filterStatus)
-    .filter(t => t.title?.toLowerCase().includes(search.toLowerCase()));
+    .filter(t =>
+      search === "" ||
+      t.title?.toLowerCase().includes(search.toLowerCase()) ||
+      t.description?.toLowerCase().includes(search.toLowerCase()) ||
+      t.category?.toLowerCase().includes(search.toLowerCase()) ||
+      t.priority?.toLowerCase().includes(search.toLowerCase())
+    );
 
   const inputStyle = {
     width: "100%", padding: "10px 12px", borderRadius: "8px",
