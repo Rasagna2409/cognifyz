@@ -1,3 +1,6 @@
+import dotenv from "dotenv";
+dotenv.config(); // ← must be first!
+
 import dns from "dns";
 dns.setServers(["8.8.8.8", "1.1.1.1"]);
 dns.setDefaultResultOrder("ipv4first");
@@ -5,18 +8,17 @@ dns.setDefaultResultOrder("ipv4first");
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
-import dotenv from "dotenv";
+import morgan from "morgan";
 
 import authRoutes from "./routes/auth.js";
 import taskRoutes from "./routes/task.js";
 import adminRoutes from "./routes/admin.js";
 import chatRoutes from "./routes/chat.js";
 
-dotenv.config();
+const app = express(); // ← create app first!
 
-const app = express();
-app.use(express.json());
-
+app.use(morgan("dev"));      // ✅ logging
+app.use(express.json());     // ✅ body parsing
 app.use(cors({
   origin: function(origin, callback) {
     callback(null, true);

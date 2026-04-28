@@ -1,11 +1,12 @@
 import express from "express";
 import Task from "../models/Task.js";
 import { auth } from "../middleware/auth.js";
+import { cacheMiddleware } from "../middleware/cache.js";
 
 const router = express.Router();
 
-// Get all tasks
-router.get("/", auth, async (req, res) => {
+// Get all tasks (with caching)
+router.get("/", auth, cacheMiddleware, async (req, res) => {
   const tasks = await Task.find({ userId: req.user.id });
   res.json(tasks);
 });
