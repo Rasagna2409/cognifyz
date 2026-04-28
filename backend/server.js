@@ -23,7 +23,7 @@ app.use(cors({
   origin: function(origin, callback) {
     callback(null, true);
   },
-  methods: ["GET", "POST", "PUT", "DELETE"],
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH"], // ← add PATCH here!
   credentials: true
 }));
 
