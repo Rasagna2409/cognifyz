@@ -1,19 +1,6 @@
 import express from "express";
 import User from "../models/User.js";
 
-// DEACTIVATE / ACTIVATE user
-router.patch("/user/:id/toggle", async (req, res) => {
-  try {
-    const user = await User.findById(req.params.id);
-    if (!user) return res.status(404).json({ msg: "User not found" });
-    user.isActive = !user.isActive;
-    await user.save();
-    res.json(user);
-  } catch (err) {
-    res.status(500).json({ msg: err.message });
-  }
-});
-
 const router = express.Router();
 
 // GET all users
@@ -31,14 +18,25 @@ router.delete("/user/:id", async (req, res) => {
 // UPDATE role
 router.put("/user/:id", async (req, res) => {
   const { role } = req.body;
-
   const user = await User.findByIdAndUpdate(
     req.params.id,
     { role },
     { new: true }
   );
-
   res.json(user);
+});
+
+// DEACTIVATE / ACTIVATE user
+router.patch("/user/:id/toggle", async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    if (!user) return res.status(404).json({ msg: "User not found" });
+    user.isActive = !user.isActive;
+    await user.save();
+    res.json(user);
+  } catch (err) {
+    res.status(500).json({ msg: err.message });
+  }
 });
 
 export default router;
